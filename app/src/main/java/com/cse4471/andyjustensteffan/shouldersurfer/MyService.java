@@ -6,8 +6,7 @@ import android.hardware.Camera;
 import android.os.IBinder;
 import android.util.Log;
 import android.graphics.Bitmap;
-import android.media.FaceDetector;
-import android.media.FaceDetector.Face;
+import android.support.v4.content.LocalBroadcastManager;
 
 /**
  * Created by andy on 141019.
@@ -15,13 +14,6 @@ import android.media.FaceDetector.Face;
 public class MyService extends Service
 {
   private static final String TAG = "myservice";
-  private Camera mCamera;
-  private Bitmap cameraBitmap = null;
-  private static final int MAX_FACES = 5;
-  private static final int TAKE_PICTURE_CODE = 100;
-  public int numFaces;
-  // Holds the Face Detection result:
-  private Camera.Face[] mFaces;
   @Override
   public IBinder onBind(Intent intent)
   {
@@ -32,30 +24,17 @@ public class MyService extends Service
   public void onCreate()
   {
     Log.d(TAG, "started");
-    Record();
-
+    Send();
   }
 
-  private void Record() {
-      Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-      //startActivityForResult(intent, TAKE_PICTURE_CODE);  I don't know how to do this from a
-      //service.
-      cameraBitmap = (Bitmap)intent.getExtras().get("data");
-      detectFaces();
-  }
-
-  private void detectFaces(){
-      numFaces=0;
-      if(null != cameraBitmap) {
-          int width = cameraBitmap.getWidth();
-          int height = cameraBitmap.getHeight();
-          FaceDetector detector = new FaceDetector(width, height, MyService.MAX_FACES);
-          Face[] faces = new Face[MyService.MAX_FACES];
-          numFaces = faces.length;
-      }
-    if (numFaces!=0) {
-        Log.d(TAG, Integer.toString(numFaces));
-    }
+  private void Send() {
+      Intent intent = new Intent("custom-event-name");
+      // You can also include some extra data.
+      intent.putExtra("message", "This is my message!");
+      LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
   }
 
 }
+/*
+
+ */
