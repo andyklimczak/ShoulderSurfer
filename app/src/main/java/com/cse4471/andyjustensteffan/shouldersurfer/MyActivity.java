@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 
-
 public class MyActivity extends Activity implements View.OnClickListener {
     private static final String TAG = "myactivity";
     @Override
@@ -22,7 +21,6 @@ public class MyActivity extends Activity implements View.OnClickListener {
       buttonStart.setOnClickListener(this);
       buttonStop.setOnClickListener(this);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
