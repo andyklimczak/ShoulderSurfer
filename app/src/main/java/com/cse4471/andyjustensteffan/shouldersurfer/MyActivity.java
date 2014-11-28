@@ -1,6 +1,7 @@
 package com.cse4471.andyjustensteffan.shouldersurfer;
 
 import android.app.Activity;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
