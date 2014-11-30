@@ -12,3 +12,5 @@ https://github.com/bytefish/facerec/blob/master/android/VideoFaceDetection/app/s
 http://www.edumobile.org/android/android-programming-tutorials/face-detection-example-tutorials-in-android/
 
 These both seem to be good resources as examples for how to use the setup.
+
+http://stackoverflow.com/questions/4545079/lock-the-android-device-programatically  <-- this is how we lock the device, just trying to get it to print out messages when it detects faces though, because it isn't calling onfacedetect at all.
