@@ -3,13 +3,16 @@
     package="com.cse4471.andyjustensteffan.shouldersurfer" >
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
     <uses-feature
         android:name="android.hardware.camera.front"
         android:required="false" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -29,6 +32,10 @@
             android:name=".MyService"
             android:enabled="true" />
 
+        <activity
+            android:name=".LockMeNowActivity"
+            android:label="@string/title_activity_lock_me_now" >
+        </activity>
     </application>
 
 </manifest>

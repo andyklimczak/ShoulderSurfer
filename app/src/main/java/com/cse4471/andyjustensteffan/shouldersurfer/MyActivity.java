@@ -1,6 +1,9 @@
 package com.cse4471.andyjustensteffan.shouldersurfer;
 
 import android.app.Activity;
+import android.app.admin.DeviceAdminReceiver;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,9 +14,13 @@ import android.widget.Button;
 
 public class MyActivity extends Activity implements View.OnClickListener {
     private static final String TAG = "myactivity";
+    private ComponentName cn=null;
+    private DevicePolicyManager mgr=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+      cn=new ComponentName(this, DeviceAdminReceiver.class);
+      mgr=(DevicePolicyManager)getSystemService(DEVICE_POLICY_SERVICE);
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_my);
       //create button and give them listeners
@@ -21,6 +28,13 @@ public class MyActivity extends Activity implements View.OnClickListener {
       Button buttonStop = (Button)findViewById(R.id.buttonStop);
       buttonStart.setOnClickListener(this);
       buttonStop.setOnClickListener(this);
+
+     if (!mgr.isAdminActive(cn)) {
+         Intent intent =
+                 new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, cn);
+         startActivity(intent);
+     }
     }
 
     @Override

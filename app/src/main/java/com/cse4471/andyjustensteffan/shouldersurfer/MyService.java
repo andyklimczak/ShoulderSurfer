@@ -87,14 +87,8 @@ public class MyService extends Service
   private void lock() {
       if (mgr.isAdminActive(cn)) {
           mgr.lockNow();
-      }
-      if (mgr.isAdminActive(cn)) {
-          mgr.lockNow();
       } else {
-          Intent intent=
-                  new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-          intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, cn);
-          startActivity(intent);
+          Log.d(TAG, "Error: No admin device detected. Restart and regain admin.");
       }
   }
 }
