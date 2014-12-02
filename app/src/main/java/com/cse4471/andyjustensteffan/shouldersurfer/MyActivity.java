@@ -13,8 +13,8 @@ import android.widget.Button;
 
 public class MyActivity extends Activity implements View.OnClickListener {
     private static final String TAG = "myactivity";
-    private ComponentName cn=null;
-    private DevicePolicyManager mgr=null;
+    public static ComponentName cn=null;
+    public static DevicePolicyManager mgr=null;
     private int requestCode;
     protected static final int REQUEST_ENABLE = 0;
 
@@ -79,7 +79,8 @@ public class MyActivity extends Activity implements View.OnClickListener {
     {
       case R.id.buttonStart:
         Log.d(TAG, "start");
-        startService(new Intent(this, MyService.class));
+        Intent startServ = new Intent(this, MyService.class);
+        startService(startServ);
         break;
       case R.id.buttonStop:
         Log.d(TAG, "stop");

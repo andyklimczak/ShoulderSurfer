@@ -1,7 +1,6 @@
 package com.cse4471.andyjustensteffan.shouldersurfer;
 
 import android.app.Service;
-import android.app.admin.DeviceAdminReceiver;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -34,8 +33,8 @@ public class MyService extends Service
   @Override
   public void onCreate()
   {
-    mgr=(DevicePolicyManager)getSystemService(DEVICE_POLICY_SERVICE);
-    cn=new ComponentName(this, DeviceAdminReceiver.class);
+    mgr=MyActivity.mgr;
+    cn=MyActivity.cn;
     super.onCreate();
     Log.d(TAG, "started");
     try {
@@ -46,6 +45,9 @@ public class MyService extends Service
       c.startPreview();
       c.startFaceDetection();
       Log.d(TAG, "after start of face detection");
+        if (mgr.isAdminActive(cn)) {
+            Log.d(TAG, "AM service admin");
+        }
     }
     catch(Exception e){
       Log.d(TAG, "couldn't open front camera");
@@ -84,11 +86,11 @@ public class MyService extends Service
     return cam;
   }
 
-  private void lock() {
-      if (mgr.isAdminActive(cn)) {
-          mgr.lockNow();
-      } else {
-          Log.d(TAG, "Error: No admin device detected. Restart and regain admin.");
-      }
-  }
+    private void lock() {
+        if (mgr.isAdminActive(cn)) {
+            mgr.lockNow();
+        } else {
+            Log.d(TAG, "Error: No admin device detected. Restart and regain admin.");
+        }
+    }
 }
