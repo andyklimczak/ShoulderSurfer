@@ -21,21 +21,28 @@
         <activity
             android:name=".MyActivity"
             android:label="@string/app_name" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <receiver
+            android:name=".DAClass"
+            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin_policies" />
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+
         <service
             android:name=".MyService"
             android:enabled="true" />
-
-        <activity
-            android:name=".LockMeNowActivity"
-            android:label="@string/title_activity_lock_me_now" >
-        </activity>
     </application>
 
 </manifest>

@@ -1,7 +1,6 @@
 package com.cse4471.andyjustensteffan.shouldersurfer;
 
 import android.app.Activity;
-import android.app.admin.DeviceAdminReceiver;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -16,10 +15,12 @@ public class MyActivity extends Activity implements View.OnClickListener {
     private static final String TAG = "myactivity";
     private ComponentName cn=null;
     private DevicePolicyManager mgr=null;
+    private int requestCode;
+    protected static final int REQUEST_ENABLE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-      cn=new ComponentName(this, DeviceAdminReceiver.class);
+      cn=new ComponentName(this, DAClass.class);
       mgr=(DevicePolicyManager)getSystemService(DEVICE_POLICY_SERVICE);
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_my);
@@ -30,11 +31,19 @@ public class MyActivity extends Activity implements View.OnClickListener {
       buttonStop.setOnClickListener(this);
 
      if (!mgr.isAdminActive(cn)) {
+         Log.d(TAG, "Requesting DeviceAdmin");
          Intent intent =
                  new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
          intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, cn);
-         startActivity(intent);
+         intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+                 "For experimentation purposes only");
+         startActivityForResult(intent,REQUEST_ENABLE);
      }
+        else
+     {
+         Log.d(TAG, "AmAdmin");
+     }
+
     }
 
     @Override
@@ -42,6 +51,13 @@ public class MyActivity extends Activity implements View.OnClickListener {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.my, menu);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (REQUEST_ENABLE == requestCode) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
