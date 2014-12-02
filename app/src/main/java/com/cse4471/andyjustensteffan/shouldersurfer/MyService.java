@@ -1,12 +1,14 @@
 package com.cse4471.andyjustensteffan.shouldersurfer;
 
 import android.app.Service;
+import android.app.admin.DeviceAdminReceiver;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.hardware.Camera;
 import android.hardware.Camera.FaceDetectionListener;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 public class MyService extends Service
 {
@@ -17,6 +19,9 @@ public class MyService extends Service
   {
     return null;
   }
+
+    private DevicePolicyManager mgr=null;
+    private ComponentName cn=null;
 
   @Override
   public void onDestroy() {
@@ -29,6 +34,8 @@ public class MyService extends Service
   @Override
   public void onCreate()
   {
+    mgr=(DevicePolicyManager)getSystemService(DEVICE_POLICY_SERVICE);
+    cn=new ComponentName(this, DeviceAdminReceiver.class);
     super.onCreate();
     Log.d(TAG, "started");
     try {
@@ -45,13 +52,16 @@ public class MyService extends Service
     }
   }
 
-  private static Camera.FaceDetectionListener faceDetectionListener = new FaceDetectionListener() {
+  private Camera.FaceDetectionListener faceDetectionListener = new FaceDetectionListener() {
     @Override
     public void onFaceDetection(Camera.Face[] faces,Camera c) {
       if (faces.length == 0) {
         Log.i(TAG, "No faces detected");
       } else if (faces.length > 0) {
         Log.i(TAG, "Faces Detected = " + String.valueOf(faces.length));
+          if (faces.length > 1) {
+              lock();
+          }
       }
     }
   };
@@ -72,5 +82,11 @@ public class MyService extends Service
       }
     }
     return cam;
+  }
+
+  private void lock() {
+      if (mgr.isAdminActive(cn)) {
+          mgr.lockNow();
+      }
   }
 }
