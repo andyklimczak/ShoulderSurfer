@@ -1,3 +1,14 @@
+/**
+ * Andy Klimczak
+ * Steffan Pease
+ * Justen Meyer
+ * cse 4471 20141203
+ *
+ * The is a android security app that helps prevent shoulder surfing. The app works by creating a background service the turns
+ * on the camera, and the camera then scans for faces. If the camera detects more than 1 faces (more than just the current phone
+ * user's face), it automatically locks the screen. The is done to keep wandering eyes from seeing the display as easily.
+ */
+
 package com.cse4471.andyjustensteffan.shouldersurfer;
 
 import android.app.Activity;
@@ -19,6 +30,7 @@ public class MyActivity extends Activity implements View.OnClickListener {
     protected static final int REQUEST_ENABLE = 0;
 
     @Override
+    //creates the main phone page that the user sees to turn the service on and off
     protected void onCreate(Bundle savedInstanceState) {
       cn=new ComponentName(this, DAClass.class);
       mgr=(DevicePolicyManager)getSystemService(DEVICE_POLICY_SERVICE);
@@ -30,6 +42,8 @@ public class MyActivity extends Activity implements View.OnClickListener {
       buttonStart.setOnClickListener(this);
       buttonStop.setOnClickListener(this);
 
+      //used to give the app admin privileges
+      //admin privileges are necessary for the app to lock the phone by itself
      if (!mgr.isAdminActive(cn)) {
          Log.d(TAG, "Requesting DeviceAdmin");
          Intent intent =
@@ -38,12 +52,9 @@ public class MyActivity extends Activity implements View.OnClickListener {
          intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
                  "For experimentation purposes only");
          startActivityForResult(intent,REQUEST_ENABLE);
-     }
-        else
-     {
+     } else {
          Log.d(TAG, "AmAdmin");
-     }
-
+      }
     }
 
     @Override
@@ -77,11 +88,13 @@ public class MyActivity extends Activity implements View.OnClickListener {
     //find which button is being pressed
     switch(view.getId())
     {
+      //start camera detecting service
       case R.id.buttonStart:
         Log.d(TAG, "start");
         Intent startServ = new Intent(this, MyService.class);
         startService(startServ);
         break;
+      //stop camera detecting service
       case R.id.buttonStop:
         Log.d(TAG, "stop");
         stopService(new Intent(this, MyService.class));

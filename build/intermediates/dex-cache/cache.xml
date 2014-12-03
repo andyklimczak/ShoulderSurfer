@@ -2,22 +2,22 @@
 <pre-dex-items>
 
     <item
-        dex="S:\Users\Steffan\Documents\GitHub\ShoulderSurfer\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-a718c31da9dbaabe4276de1402d1670f9173eefc.jar"
-        jar="S:\Users\Steffan\Documents\GitHub\ShoulderSurfer\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
+        dex="X:\Files\programming\ShoulderSurfer\app\build\intermediates\pre-dexed\debug\classes-556da7fe7f3e24ec8bc15171db96d8a5ecdf8d23.jar"
+        jar="X:\Files\programming\ShoulderSurfer\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
     <item
-        dex="S:\Users\Steffan\Documents\GitHub\ShoulderSurfer\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-bc19f861f9303b29034b6b3e93cc657eacd2ac45.jar"
-        jar="S:\Program Files (x86)\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        dex="X:\Files\programming\ShoulderSurfer\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-eb1eec27c1b7eec13b743db7a3da862d17907b40.jar"
+        jar="P:\adt-bundle-windows-x86_64-20140702\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
     <item
-        dex="S:\Users\Steffan\Documents\GitHub\ShoulderSurfer\app\build\intermediates\pre-dexed\debug\classes-339b49f75d01f540aced4642724537b0d918988d.jar"
-        jar="S:\Users\Steffan\Documents\GitHub\ShoulderSurfer\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
+        dex="X:\Files\programming\ShoulderSurfer\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-9851bb403a8fddffd8a02ed7f4a651a3b07f00ed.jar"
+        jar="X:\Files\programming\ShoulderSurfer\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
 
 </pre-dex-items>

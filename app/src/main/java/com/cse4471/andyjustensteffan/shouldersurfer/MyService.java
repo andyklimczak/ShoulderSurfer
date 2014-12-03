@@ -23,6 +23,7 @@ public class MyService extends Service
     private ComponentName cn=null;
 
   @Override
+  //used for when the service is disabled, properly releases the camera resources
   public void onDestroy() {
     c.stopPreview();
     c.stopFaceDetection();
@@ -31,6 +32,7 @@ public class MyService extends Service
   }
 
   @Override
+  //sets up the camera and starts the face detection
   public void onCreate()
   {
     mgr=MyActivity.mgr;
@@ -39,7 +41,7 @@ public class MyService extends Service
     Log.d(TAG, "started");
     try {
       c = openFrontFacingCamera();
-      c.setPreviewDisplay(new DummySurfaceHolder());
+      c.setPreviewDisplay(new DummySurfaceHolder());//creates a dummy preview so the camera can be used in the background service
       Log.d(TAG, "before face listener");
       c.setFaceDetectionListener(faceDetectionListener);
       c.startPreview();
@@ -54,6 +56,7 @@ public class MyService extends Service
     }
   }
 
+  //callback for the face detection
   private Camera.FaceDetectionListener faceDetectionListener = new FaceDetectionListener() {
     @Override
     public void onFaceDetection(Camera.Face[] faces,Camera c) {
@@ -61,6 +64,7 @@ public class MyService extends Service
         Log.i(TAG, "No faces detected");
       } else if (faces.length > 0) {
         Log.i(TAG, "Faces Detected = " + String.valueOf(faces.length));
+          //if the number of faces seen by the camera is greater than 1, lock the camera
           if (faces.length > 1) {
               lock();
           }
@@ -68,6 +72,7 @@ public class MyService extends Service
     }
   };
 
+  //used to specifically get the front camera
   private Camera openFrontFacingCamera() {
     int cameraCount = 0;
     Camera cam = null;
@@ -86,6 +91,7 @@ public class MyService extends Service
     return cam;
   }
 
+    //locks the phone when the app has admin privileges
     private void lock() {
         if (mgr.isAdminActive(cn)) {
             mgr.lockNow();
